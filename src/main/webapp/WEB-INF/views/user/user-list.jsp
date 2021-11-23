@@ -35,24 +35,25 @@
 				<thead>
 					<tr>
 						<th>ID</th>
+						<th>Name</th>
 						<th>Email</th>
-						<th>PassWord</th>
-						<th>FullName</th>
-						<th>Avatar</th>
+						<th>Password</th>
+						<th>Phone</th>
+						<th>Address</th>
 						<th>Role Id</th>
 						<th>#</th>
 					</tr>
-				</thead>				
+				</thead>
 				<tbody>
 					<c:forEach var="user" items="${users}">
-					<h1>Test</h1>
 						<tr>
 							<td>${user.id}</td>
+							<td>${user.name}</td>
 							<td>${user.email}</td>
 							<td>${user.password}</td>
-							<td>$${user.fullname}</td>
-							<td>${user.avatar}</td>
-							<td>${user.role_id}</td>
+							<td>${user.phone}</td>
+							<td>${user.address}</td>
+							<td>${user.roleId}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

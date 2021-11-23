@@ -1,6 +1,8 @@
 package cybersoft.javabackend.java14.crm.service;
 
-import cybersoft.javabackend.java14.crm.model.User;
+import java.util.List;
+
+import cybersoft.javabackend.java14.crm.entity.User;
 import cybersoft.javabackend.java14.crm.repository.UserRepository;
 
 public class UserService {
@@ -8,6 +10,10 @@ public class UserService {
 	
 	public UserService() {
 		repository = new UserRepository();
+	}
+	
+	public List<User> getUser() {
+		return repository.getUser();
 	}
 	
 	public boolean addUser(User user) {

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cybersoft.javabackend.java14.crm.service.UserService;
-import cybersoft.javabackend.java14.crm.utils.JspConst;
-import cybersoft.javabackend.java14.crm.utils.UrlConst;
+import cybersoft.javabackend.java14.crm.util.JspConst;
+import cybersoft.javabackend.java14.crm.util.UrlConst;
 
 @WebServlet(name="userServlet", urlPatterns = {
 		UrlConst.USER_LIST,
@@ -19,12 +19,12 @@ import cybersoft.javabackend.java14.crm.utils.UrlConst;
 public class UserServlet extends HttpServlet{
 
 	private static final long serialVersionUID = -4224315611215393558L;
-	private UserService service;
+	private UserService userService;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		service = new UserService();
+		userService = new UserService();
 	}
 	
 	@Override
@@ -32,6 +32,7 @@ public class UserServlet extends HttpServlet{
 		String path = request.getServletPath();
 		switch (path) {
 		case UrlConst.USER_LIST:
+			request.setAttribute("users", userService.getUser()); 
 			request.getRequestDispatcher(JspConst.USER_LIST).forward(request, response);
 			break;
 		case UrlConst.CREATE_USER:

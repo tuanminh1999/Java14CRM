@@ -1,4 +1,4 @@
-package cybersoft.javabackend.java14.crm.utils;
+package cybersoft.javabackend.java14.crm.util;
 
 public class UrlConst {
 	/* HOME */
