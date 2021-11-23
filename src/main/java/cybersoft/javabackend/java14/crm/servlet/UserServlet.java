@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cybersoft.javabackend.java14.crm.service.UserService;
 import cybersoft.javabackend.java14.crm.utils.JspConst;
 import cybersoft.javabackend.java14.crm.utils.UrlConst;
 
@@ -18,6 +19,13 @@ import cybersoft.javabackend.java14.crm.utils.UrlConst;
 public class UserServlet extends HttpServlet{
 
 	private static final long serialVersionUID = -4224315611215393558L;
+	private UserService service;
+	
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		service = new UserService();
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
