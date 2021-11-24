@@ -6,17 +6,18 @@ import cybersoft.javabackend.java14.crm.entity.User;
 import cybersoft.javabackend.java14.crm.repository.UserRepository;
 
 public class UserService {
-	private UserRepository repository;
+	private UserRepository userRepository;
 	
 	public UserService() {
-		repository = new UserRepository();
+		userRepository = new UserRepository();
 	}
 	
 	public List<User> getUser() {
-		return repository.getUser();
+		return userRepository.getUser();
 	}
 	
 	public boolean addUser(User user) {
-		return repository.addUser(user) == 1 ? true : false;
+		return userRepository.addUser(user) == 1 ? true : false;
 	}
+	
 }

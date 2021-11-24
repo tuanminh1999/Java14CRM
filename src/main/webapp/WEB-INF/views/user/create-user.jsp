@@ -4,7 +4,9 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Homepage</title>
+<title>Create User</title>
+<!-- Validate User -->
+<script src='<c:url value="assets/validate/validate-create-user.js" />'></script>
 </head>
 
 <body>
@@ -33,24 +35,66 @@
 	</div>
 
 	<div class="container page__container">
-		<form action="/action_page.php">
-			<label for="fname">Email:</label> 
-			<input type="text" id="email" name="email"><br> 
-			<label for="pwd">Password:</label>
-			<input type="password" id="pwd" name="pwd"><br> 
-			<label for="fname">Full Name:</label>
-			<input type="text" id="fname" name="fname"><br> 
-			<label for="avatar">Avatar:</label> 
-			<input type="text" id="avatar" name="avatar"><br> 
-			<label for="roleId">Role Id:</label>
-			<input type="text" id="roleId" name="roleId"><br> 
-			<input type="submit" value="Submit">
-		</form>	
-	</div>
+		<div class="col-sm-12">
+			<c:if test="${not empty message}">
+				<div class="alert alert-block alert-${alert}">
+					<button type="button" class="close" data-dismiss="alert">
+						<i class="ace-icon fa fa-times"></i>
+					</button>
+					${message}
+				</div>
+			</c:if>
+		</div>
+		<form method="post" action="<c:url value="/create-user"/>" id="userForm" onsubmit="return validateUserForm()">
+			<div class="form-group">
+				<label class="col-sm-5 control-label no-padding-right">Name</label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" name="name" />
+				</div>
+			</div>
 
-	<content tag="scripts"> <!-- Chart.js --> <script
-		src='<c:url value="assets/vendor/Chart.min.js" />'></script> <!-- App Charts JS -->
-	<script src='<c:url value="assets/js/chartjs-rounded-bar.js" />'></script>
-	<script src='<c:url value="assets/js/charts.js" />'></script> <!-- Chart Samples -->
-	<script src='<c:url value="assets/js/page.dashboard.js" />'></script> </content>
+			<div class="form-group">
+				<label class="col-sm-5 control-label no-padding-right">Email</label>
+				<div class="col-sm-7">
+					<input type="email" class="form-control" name="email" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-5 control-label no-padding-right">Password</label>
+				<div class="col-sm-7">
+					<input type="password" class="form-control" name="password" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-5 control-label no-padding-right">Phone</label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" name="phone" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-5 control-label no-padding-right">Address</label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" name="address" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-8 control-label no-padding-right">Role</label>
+				<div class="col-sm-4">
+					<select class="form-control" name="roleId">
+						<c:forEach var="item" items="${roles }">
+							<option value="${item.id }">${item.name }</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-sm-12">
+				<input type="submit" class="btn btn-primary" value="Create User">
+			</div>
+		</form>
+	</div>
 </body>

@@ -8,6 +8,8 @@ public class User {
 	private String email;
 	private String address;
 	private int roleId;
+	private Role role;
+	
 	public int getId() {
 		return id;
 	}
@@ -50,6 +52,12 @@ public class User {
 	}
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }

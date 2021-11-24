@@ -4,7 +4,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Homepage</title>
+<title>User List</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div class="container-fluid">
-			<table class="table mt-5">
+			<table class="table table-bordered">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -40,8 +40,7 @@
 						<th>Password</th>
 						<th>Phone</th>
 						<th>Address</th>
-						<th>Role Id</th>
-						<th>#</th>
+						<th>Role</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -53,22 +52,11 @@
 							<td>${user.password}</td>
 							<td>${user.phone}</td>
 							<td>${user.address}</td>
-							<td>${user.roleId}</td>
+							<td>${user.role.name}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
-
-
-
-
-
-
-	<content tag="scripts"> <!-- Chart.js --> <script
-		src='<c:url value="assets/vendor/Chart.min.js" />'></script> <!-- App Charts JS -->
-	<script src='<c:url value="assets/js/chartjs-rounded-bar.js" />'></script>
-	<script src='<c:url value="assets/js/charts.js" />'></script> <!-- Chart Samples -->
-	<script src='<c:url value="assets/js/page.dashboard.js" />'></script> </content>
 </body>
