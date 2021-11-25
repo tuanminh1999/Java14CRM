@@ -62,6 +62,53 @@ public class UserRepository {
 		}
 		return users;
 	}
+	
+	public User findOneByUserId(int id) {
+		try {
+			connection = MySQLConnection.getConnection();
+			StringBuilder query = new StringBuilder("SELECT u.id, u.name, u.email, u.password, u.phone, u.address, u.role_id, ");
+			query.append("r.id, r.name, r.description FROM crm_user AS u INNER JOIN crm_role AS r ON u.role_id = r.id WHERE u.id = ?");
+
+			statement = connection.prepareStatement(query.toString());
+			statement.setInt(1, id);
+			rs = statement.executeQuery();
+
+			while (rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt("u.id"));
+				user.setName(rs.getString("u.name"));
+				user.setEmail(rs.getString("u.email"));
+				user.setPassword(rs.getString("u.password"));
+				user.setPhone(rs.getString("u.phone"));
+				user.setAddress(rs.getString("u.address"));
+				user.setRoleId(rs.getInt("u.role_id"));
+				
+				try {
+					Role role = new Role();
+					role.setName(rs.getString("r.name"));
+					role.setDescription(rs.getString("r.description"));
+					user.setRole(role);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				return user;
+			}
+		} catch (SQLException e) {
+			System.out.println("Không thể kết nối đến cơ sở dữ liệu");
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+				rs.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối");
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 
 	public int addUser(User user) {
 		try {
@@ -76,6 +123,64 @@ public class UserRepository {
 			statement.setString(4, user.getPhone());
 			statement.setString(5, user.getAddress());
 			statement.setInt(6, user.getRoleId());
+
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Không thể kết nối đến cơ sở dữ liệu");
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối");
+				e.printStackTrace();
+			}
+		}
+		return 0;
+
+	}
+	
+	public int editUser(User user) {
+		try {
+			connection = MySQLConnection.getConnection();
+			String query = "UPDATE crm_user SET name = ?, email = ?, password = ?, phone = ?, address = ?, role_id = ? WHERE id = ?";
+
+			statement = connection.prepareStatement(query);
+
+			statement.setString(1, user.getName());
+			statement.setString(2, user.getEmail());
+			statement.setString(3, user.getPassword());
+			statement.setString(4, user.getPhone());
+			statement.setString(5, user.getAddress());
+			statement.setInt(6, user.getRoleId());
+			statement.setInt(7, user.getId());
+
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Không thể kết nối đến cơ sở dữ liệu");
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối");
+				e.printStackTrace();
+			}
+		}
+		return 0;
+
+	}
+	
+	public int deleteUser(int id) {
+		try {
+			connection = MySQLConnection.getConnection();
+			String query = "DELETE FROM crm_user WHERE id = ?";
+
+			statement = connection.prepareStatement(query);
+
+			statement.setInt(1, id);
 
 			return statement.executeUpdate();
 		} catch (SQLException e) {

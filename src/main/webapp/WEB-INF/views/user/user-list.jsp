@@ -30,33 +30,73 @@
 				</div>
 			</div>
 		</div>
-		<div class="container-fluid">
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Password</th>
-						<th>Phone</th>
-						<th>Address</th>
-						<th>Role</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="user" items="${users}">
-						<tr>
-							<td>${user.id}</td>
-							<td>${user.name}</td>
-							<td>${user.email}</td>
-							<td>${user.password}</td>
-							<td>${user.phone}</td>
-							<td>${user.address}</td>
-							<td>${user.role.name}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+	</div>
+
+	<div class="container page__container">
+		<!-- Page Content -->
+		<div class="card card-form">
+			<div class="row no-gutters">
+				<div class="col-lg-12 card-form__body border-left">
+
+					<div class="table-responsive border-bottom" data-toggle="lists"
+						data-lists-values='["js-lists-values-employee-name"]'>
+
+
+						<table class="table mb-0 thead-border-top-0">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Role</th>
+									<th>Email</th>
+									<th>Phone</th>
+									<th>Address</th>
+									<th>Edit</th>
+									<th>Delete</th>
+								</tr>
+							</thead>
+							<tbody class="list" id="staff02">
+								<c:forEach var="user" items="${users}">
+								<tr>
+									<td>${user.name}</td>
+									<c:choose>
+										<c:when test="${user.role.name eq 'ADMIN' }">
+											<td><span class="badge badge-warning">${user.role.name }</span></td>
+										</c:when>
+										<c:when test="${user.role.name eq 'LEADER' }">
+											<td><span class="badge badge-primary">${user.role.name }</span></td>
+										</c:when>
+										<c:when test="${user.role.name eq 'MEMBER' }">
+											<td><span class="badge badge-success">${user.role.name }</span></td>
+										</c:when>
+									</c:choose>
+									<td>${user.email}</td>
+									<td>${user.phone}</td>
+									<td>${user.address}</td>
+									<td>
+										<a type="button" class="btn btn-light" data-toggle="tooltip" title='Edit User'
+										   href="<c:url value='/create-user?id=${user.id }'/>">
+                                        	<i class="fas fa-edit"></i>
+                                    	</a>
+									</td>
+									<td>
+										<form action="<c:url value='/user-list'/>">
+											<input type="hidden" name="id" value="${user.id }">
+											<button type="submit" class="btn btn-danger" data-toggle="tooltip" title='Delete User'>
+	                                       		<i class="fas fa-times"></i>
+	                                  		</button>
+                                  		</form>
+									</td>
+									
+								</tr>
+								</c:forEach>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
+		<!-- END Page Content -->
+
 	</div>
 </body>

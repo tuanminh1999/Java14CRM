@@ -14,47 +14,54 @@ import cybersoft.javabackend.java14.crm.service.UserService;
 import cybersoft.javabackend.java14.crm.util.JspConst;
 import cybersoft.javabackend.java14.crm.util.UrlConst;
 
-@WebServlet(name="userServlet", urlPatterns = {
-		UrlConst.USER_LIST,
-		UrlConst.CREATE_USER
-})
-public class UserServlet extends HttpServlet{
+@WebServlet(name = "userServlet", urlPatterns = { UrlConst.USER_LIST, UrlConst.CREATE_USER })
+public class UserServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -4224315611215393558L;
 	private UserService userService;
 	private RoleService roleService;
-	
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		userService = new UserService();
 		roleService = new RoleService();
 	}
-	
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String path = request.getServletPath();
 		switch (path) {
 		case UrlConst.USER_LIST:
-			request.setAttribute("users", userService.getUser()); 
+			if (request.getParameter("id") != null) {
+				int userId = Integer.parseInt(request.getParameter("id"));
+				userService.deleteUser(userId);
+			}
+			request.setAttribute("users", userService.getUser());
 			request.getRequestDispatcher(JspConst.USER_LIST).forward(request, response);
 			break;
 		case UrlConst.CREATE_USER:
+			if (request.getParameter("id") != null) {
+				int userId = Integer.parseInt(request.getParameter("id"));
+				request.setAttribute("user", userService.findOneByUserId(userId));
+			}
 			request.setAttribute("roles", roleService.getRole());
 			request.getRequestDispatcher(JspConst.CREATE_USER).forward(request, response);
 			break;
 		}
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String address = request.getParameter("address");
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phone");
 		int roleId = Integer.parseInt(request.getParameter("roleId"));
-		
+
 		User user = new User();
 		user.setName(name);
 		user.setEmail(email);
@@ -63,12 +70,25 @@ public class UserServlet extends HttpServlet{
 		user.setPhone(phone);
 		user.setRoleId(roleId);
 		
-		if(userService.addUser(user)) {
-			request.setAttribute("message", "Thêm thành công");
-			request.setAttribute("alert", "success");
-		}else {
-			request.setAttribute("message", "Thêm thất bại công");
-			request.setAttribute("alert", "danger");
+		if(request.getParameter("id") == null) { // Add User
+			if (userService.addUser(user)) {
+				request.setAttribute("message", "Thêm thành công");
+				request.setAttribute("alert", "success");
+			} else {
+				request.setAttribute("message", "Thêm thất bại công");
+				request.setAttribute("alert", "danger");
+			}
+		}else { // Edit User
+			int id = Integer.parseInt(request.getParameter("id"));
+			user.setId(id);
+			if (userService.editUser(user) != null) {
+				request.setAttribute("message", "Cập nhật thành công");
+				request.setAttribute("alert", "success");
+			} else {
+				request.setAttribute("message", "Cập nhật thất bại");
+				request.setAttribute("alert", "danger");
+			}
+			request.setAttribute("user", userService.editUser(user));
 		}
 		request.setAttribute("roles", roleService.getRole());
 		request.getRequestDispatcher(JspConst.CREATE_USER).forward(request, response);

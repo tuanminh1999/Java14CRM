@@ -19,11 +19,22 @@
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active" aria-current="page">User
 							</li>
-							<li class="breadcrumb-item active" aria-current="page">
+							<c:if test="${user.id == null }">
+								<li class="breadcrumb-item active" aria-current="page">
 								Create User</li>
+							</c:if>
+							<c:if test="${user.id != null }">
+								<li class="breadcrumb-item active" aria-current="page">
+								Edit User</li>
+							</c:if>
 						</ol>
 					</nav>
-					<h1 class="m-0">Create User</h1>
+					<c:if test="${user.id == null }">
+						<h1 class="m-0">Create User</h1>
+					</c:if>
+					<c:if test="${user.id != null }">
+						<h1 class="m-0">Edit User</h1>
+					</c:if>
 				</div>
 				<div class="ml-auto">
 					<a href="" class="btn btn-light"><i
@@ -37,9 +48,9 @@
 	<div class="container page__container">
 		<div class="col-sm-12">
 			<c:if test="${not empty message}">
-				<div class="alert alert-block alert-${alert}">
-					<button type="button" class="close" data-dismiss="alert">
-						<i class="ace-icon fa fa-times"></i>
+				<div class="alert alert-dismissible bg-${alert } text-white border-0 fade show">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
 					</button>
 					${message}
 				</div>
@@ -49,35 +60,35 @@
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Name</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="name" />
+					<input type="text" class="form-control" name="name" value="${user.name }"/>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Email</label>
 				<div class="col-sm-7">
-					<input type="email" class="form-control" name="email" />
+					<input type="email" class="form-control" name="email" value="${user.email }"/>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Password</label>
 				<div class="col-sm-7">
-					<input type="password" class="form-control" name="password" />
+					<input type="password" class="form-control" name="password" value="${user.password }"/>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Phone</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="phone" />
+					<input type="text" class="form-control" name="phone" value="${user.phone }"/>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Address</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="address" />
+					<input type="text" class="form-control" name="address" value="${user.address }"/>
 				</div>
 			</div>
 
@@ -85,15 +96,33 @@
 				<label class="col-sm-8 control-label no-padding-right">Role</label>
 				<div class="col-sm-4">
 					<select class="form-control" name="roleId">
-						<c:forEach var="item" items="${roles }">
-							<option value="${item.id }">${item.name }</option>
-						</c:forEach>
+						<c:if test="${empty user.role.name }"> <%-- Create User --%>
+							<c:forEach var="item" items="${roles }">
+								<option value="${item.id }">${item.name }</option>
+							</c:forEach>
+						</c:if>
+						<c:if test="${not empty user.role.name }"> <%-- Edit User --%>
+							<c:forEach var="item" items="${roles }">
+								<c:if test="${user.role.name eq item.name }">
+									<option value="${item.id }" selected="selected">${item.name }
+									</option>
+								</c:if>
+								<c:if test="${user.role.name ne item.name }">
+									<option value="${item.id }">${item.name }</option>
+								</c:if>
+							</c:forEach>
+						</c:if>
 					</select>
 				</div>
 			</div>
-
 			<div class="col-sm-12">
-				<input type="submit" class="btn btn-primary" value="Create User">
+				<c:if test="${user.id == null }">
+					<input type="submit" class="btn btn-primary" value="Create User">
+				</c:if>
+				<c:if test="${user.id != null }">
+					<input type="hidden" name="id" value="${user.id }" />
+					<input type="submit" class="btn btn-primary" value="Edit User">
+				</c:if>
 			</div>
 		</form>
 	</div>
