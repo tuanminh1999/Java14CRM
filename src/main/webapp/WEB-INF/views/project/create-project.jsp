@@ -17,7 +17,7 @@
 	                        <li class="breadcrumb-item"><a href="#">Home</a></li>
 	                        <li class="breadcrumb-item active" aria-current="page">
 	                            Project
-	                        </li>
+	                        </li>	
 	                        <li class="breadcrumb-item active" aria-current="page">
 	                            Create Project
 	                        </li>

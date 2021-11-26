@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cybersoft.javabackend.java14.crm.utils.JspConst;
-import cybersoft.javabackend.java14.crm.utils.UrlConst;
+import cybersoft.javabackend.java14.crm.util.JspConst;
+import cybersoft.javabackend.java14.crm.util.UrlConst;
 
 @WebServlet(name="projectServlet", urlPatterns = {
 		UrlConst.CREATE_PROJECT,

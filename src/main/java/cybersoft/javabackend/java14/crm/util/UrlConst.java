@@ -1,6 +1,9 @@
-package cybersoft.javabackend.java14.crm.utils;
+package cybersoft.javabackend.java14.crm.util;
 
 public class UrlConst {
+	/* ROOT */
+	public static final String ROOT = "/*";
+	
 	/* HOME */
 	public static final String HOME = "/home";
 	
