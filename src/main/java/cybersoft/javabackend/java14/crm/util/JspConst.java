@@ -8,6 +8,9 @@ public class JspConst {
 	public static final String CREATE_PROJECT = "/WEB-INF/views/project/create-project.jsp";
 	public static final String MANAGE_PROJECT = "/WEB-INF/views/project/manage-project.jsp";
 	
+	/* LogIn */
+	public static final String Login = "/WEB-INF/views/login.jsp";
+	
 	/* TASK */
 	public static final String TASK = "/WEB-INF/views/task/task-list.jsp";
 	

@@ -7,6 +7,9 @@ public class UrlConst {
 	/* HOME */
 	public static final String HOME = "/home";
 	
+	/* LogIn */
+	public static final String LogIn = "/login";
+	
 	/* PROJECT */
 	public static final String CREATE_PROJECT = "/create-project";
 	public static final String MANAGE_PROJECT = "/manage-project";
