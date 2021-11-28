@@ -16,16 +16,16 @@ public class UserService {
 		return userRepository.getUser();
 	}
 	
-	public boolean addUser(User user) {
-		return userRepository.addUser(user) == 1 ? true : false;
+	public boolean insertUser(User user) {
+		return userRepository.insertUser(user) == 1 ? true : false;
 	}
 	
 	public User findOneByUserId(int id) {
 		return userRepository.findOneByUserId(id);
 	}
 	
-	public User editUser(User user) {
-		return userRepository.editUser(user) == 1 ? findOneByUserId(user.getId()) : null;
+	public User updateUser(User user) {
+		return userRepository.updateUser(user) == 1 ? findOneByUserId(user.getId()) : null;
 	}
 	
 	public boolean deleteUser(int id) {

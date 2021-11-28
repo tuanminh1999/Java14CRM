@@ -50,8 +50,8 @@
 									<th>Email</th>
 									<th>Phone</th>
 									<th>Address</th>
-									<th>Edit</th>
-									<th>Delete</th>
+									<th style="width: 20px;">Edit</th>
+									<th style="width: 20px;">Delete</th>
 								</tr>
 							</thead>
 							<tbody class="list" id="staff02">
@@ -73,7 +73,7 @@
 									<td>${user.phone}</td>
 									<td>${user.address}</td>
 									<td>
-										<a type="button" class="btn btn-light" data-toggle="tooltip" title='Edit User'
+										<a type="button" class="btn btn-secondary" data-toggle="tooltip" title='Edit User'
 										   href="<c:url value='/create-user?id=${user.id }'/>">
                                         	<i class="fas fa-edit"></i>
                                     	</a>
@@ -86,7 +86,6 @@
 	                                  		</button>
                                   		</form>
 									</td>
-									
 								</tr>
 								</c:forEach>
 
