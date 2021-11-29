@@ -4,7 +4,6 @@ import java.util.List;
 
 import cybersoft.javabackend.java14.crm.entity.Project;
 import cybersoft.javabackend.java14.crm.repository.ProjectRepository;
-import cybersoft.javabackend.java14.crm.repository.UserRepository;
 
 public class ProjectService {
 	private ProjectRepository projectRepository;
