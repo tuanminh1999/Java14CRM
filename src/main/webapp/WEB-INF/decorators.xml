@@ -3,4 +3,8 @@
 	<decorator name="web" page="layout.jsp">
 		<pattern>/*</pattern>
 	</decorator>
+	
+	<decorator name="login" page="login.jsp">
+		<pattern>/sign*</pattern>
+	</decorator>
 </decorators>

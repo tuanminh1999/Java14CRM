@@ -16,7 +16,7 @@
 				<div>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb mb-0">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item"><a href="<c:url value='/home'/>">Home</a></li>
 							<li class="breadcrumb-item active" aria-current="page">User
 							</li>
 							<c:if test="${user.id == null }">

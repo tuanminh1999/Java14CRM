@@ -17,7 +17,7 @@ function validateUserForm() {
 		document.forms["userForm"]["name"].focus();
 		return false;
 	} else {
-		var mailFormat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		let mailFormat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		if(!email.match(mailFormat)){
 			alert("Your email address is incorrect format!");
 			document.forms["userForm"]["email"].focus();
@@ -36,7 +36,7 @@ function validateUserForm() {
 		document.forms["userForm"]["phone"].focus();
 		return false;
 	} else {
-		var phoneFormat = /^[0]{1}[0-9]{9}$/;
+		let phoneFormat = /^[0]{1}[0-9]{9}$/;
   		if(!phone.match(phoneFormat)){
 			alert("Your phone number is incorrect format!");
 			document.forms["userForm"]["phone"].focus();

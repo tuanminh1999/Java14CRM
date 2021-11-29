@@ -3,9 +3,9 @@ package cybersoft.javabackend.java14.crm.entity;
 public class User {
 	private int id;
 	private String name;
-	private String password;
+	protected String password;
 	private String phone;
-	private String email;
+	protected String email;
 	private String address;
 	private int roleId;
 	private Role role;

@@ -7,6 +7,15 @@ public class UrlConst {
 	/* HOME */
 	public static final String HOME = "/home";
 	
+	/* LOGIN */
+	public static final String SIGN_IN = "/sign-in";
+	
+	/* LOGIN */
+	public static final String SIGN_OUT = "/sign-out";
+	
+	/* SIGN UP */
+	public static final String SIGN_UP = "/sign-up";
+	
 	/* PROJECT */
 	public static final String CREATE_PROJECT = "/create-project";
 	public static final String MANAGE_PROJECT = "/manage-project";
