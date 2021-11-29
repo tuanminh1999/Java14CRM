@@ -46,7 +46,9 @@ public class AuthFilter implements Filter {
 			}
 		} 
 		else {
-			if (UrlConst.SIGN_IN.equals(request.getServletPath()) || UrlConst.SIGN_UP.equals(request.getServletPath())) {
+			if (request.getSession().getAttribute("login") != null) {
+				chain.doFilter(request, response);
+			} else if (UrlConst.SIGN_IN.equals(request.getServletPath())) {
 				chain.doFilter(request, response);
 			} else {
 				response.sendRedirect(request.getContextPath() + UrlConst.SIGN_IN);
