@@ -2,8 +2,12 @@ package cybersoft.javabackend.java14.crm.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import cybersoft.javabackend.java14.crm.entity.Project;
+import cybersoft.javabackend.java14.crm.entity.User;
 import cybersoft.javabackend.java14.crm.repository.ProjectRepository;
+import cybersoft.javabackend.java14.crm.util.SessionUtil;
 
 public class ProjectService {
 	private ProjectRepository projectRepository;
@@ -17,7 +21,6 @@ public class ProjectService {
 	}
 	
 	public boolean insertProject(Project project) {
-		project.setCreateBy(2); // Login has not created so I decided to write hard code for 'created by'  
 		return projectRepository.insertProject(project) == 1 ? true : false;
 	}
 	
@@ -26,7 +29,7 @@ public class ProjectService {
 	}
 	
 	public Project updateProject(Project project) {
-		project.setCreateBy(2); // Login has not created so I decided to write hard code for 'created by'  
+		project.setCreateBy(project.getUser().getRoleId());
 		return projectRepository.updateProject(project) == 1 ? findOneByProjectId(project.getId()) : null;
 	}
 	

@@ -91,7 +91,7 @@
 				</div>
 			</div>
 			</c:if>
-
+			
 			<div class="col-sm-12">
 				<c:if test="${project.id == null }">
 					<input type="submit" class="btn btn-primary" value="Create Project">

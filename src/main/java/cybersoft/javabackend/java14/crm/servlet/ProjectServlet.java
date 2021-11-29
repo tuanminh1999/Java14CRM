@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cybersoft.javabackend.java14.crm.entity.Project;
+import cybersoft.javabackend.java14.crm.entity.User;
 import cybersoft.javabackend.java14.crm.service.ProjectService;
 import cybersoft.javabackend.java14.crm.util.DateConverter;
 import cybersoft.javabackend.java14.crm.util.JspConst;
+import cybersoft.javabackend.java14.crm.util.SessionUtil;
 import cybersoft.javabackend.java14.crm.util.UrlConst;
 
 @WebServlet(name="projectServlet", urlPatterns = {
@@ -65,6 +67,7 @@ public class ProjectServlet extends HttpServlet{
 		project.setEndDate(DateConverter.convertStringToDateInSql(endDate));
 		
 		if(request.getParameter("id") == null) { // Add User
+			project.setCreateBy(((User)SessionUtil.getInstance().getValue(request, "login")).getId());
 			if (projectService.insertProject(project)) {
 				request.setAttribute("message", "Thêm thành công");
 				request.setAttribute("alert", "success");

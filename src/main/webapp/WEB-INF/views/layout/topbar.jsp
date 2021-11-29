@@ -118,14 +118,14 @@
                         <a href="#account_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
                             <span class="avatar avatar-sm">
                                 <span class="avatar-title rounded-circle bg-warning">
-                                    Tuấn
+                                    ${login.name }
                                 </span>
                             </span>
                         </a>
                         <div id="account_menu" class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-item-text dropdown-item-text--lh">
-                                <div><strong>Thanh Tuấn</strong></div>
-                                <div>@tuanphan</div>
+                                <div><strong>${login.name }</strong></div>
+                                <div>${login.email }</div>
                             </div>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item active" href="dashboard.html">
@@ -138,7 +138,7 @@
                                 Edit account
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="login.html">Logout</a>
+                            <a class="dropdown-item" href="<c:url value='/sign-out'/>">Sign out</a>
                         </div>
                     </li>
                 </ul>

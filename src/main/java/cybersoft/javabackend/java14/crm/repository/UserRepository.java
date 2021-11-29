@@ -193,15 +193,12 @@ public class UserRepository {
 	}
 	
 	public User checkLogIn(String email, String password) {
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet rs = null;
 
 		try {
 			connection = MySQLConnection.getConnection();
 			StringBuilder query = new StringBuilder("SELECT u.id, u.name, u.email, u.password, u.phone, u.address, u.role_id, ");
 			query.append("r.id, r.name, r.description FROM crm_user AS u INNER JOIN crm_role AS r ON u.role_id = r.id ");
-			query.append(" WHERE email = ?, password = ?");
+			query.append(" WHERE email = ? AND password = ?");
 			statement = connection.prepareStatement(query.toString());
 			statement.setString(1, email);
 			statement.setString(2, password);

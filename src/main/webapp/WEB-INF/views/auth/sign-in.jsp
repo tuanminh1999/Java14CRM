@@ -4,18 +4,25 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Login Page</title>
+<title>Sign In</title>
 </head>
 
 <body>
 	<h4 class="m-0">Welcome back!</h4>
         <p class="mb-5">Login to access your account </p>
-
-        <form action="index.html" novalidate>
+        <c:if test="${not empty message}">
+				<div class="alert alert-dismissible bg-${alert } text-white border-0 fade show">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					${message}
+				</div>
+		</c:if>
+        <form action="<c:url value='/sign-in'/>" method="post" novalidate>
             <div class="form-group">
                 <label class="text-label" for="email_2">Email Address:</label>
                 <div class="input-group input-group-merge">
-                    <input id="email_2" type="email" required="" class="form-control form-control-prepended" placeholder="john@doe.com">
+                    <input id="email_2" type="email" required class="form-control form-control-prepended" placeholder="john@doe.com" name="email">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-envelope"></span>
@@ -26,7 +33,7 @@
             <div class="form-group">
                 <label class="text-label" for="password_2">Password:</label>
                 <div class="input-group input-group-merge">
-                    <input id="password_2" type="password" required="" class="form-control form-control-prepended" placeholder="Enter your password">
+                    <input id="password_2" type="password" required class="form-control form-control-prepended" placeholder="Enter your password" name="password">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="fa fa-key"></span>
