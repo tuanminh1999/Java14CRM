@@ -39,9 +39,7 @@
 			<div class="row no-gutters">
 				<div class="col-lg-12 card-form__body border-left">
 
-					<div class="table-responsive border-bottom" data-toggle="lists"
-						data-lists-values='["js-lists-values-employee-name"]'>
-
+					<div data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>
 
 						<table class="table mb-0 thead-border-top-0">
 							<thead>
@@ -58,6 +56,7 @@
 							<tbody class="list" id="staff02">
 								<c:forEach var="project" items="${projects}">
 								<tr>
+									
 									<td>${project.name}</td>
 									<td>${project.description}</td>
 									<td>${project.startDate}</td>

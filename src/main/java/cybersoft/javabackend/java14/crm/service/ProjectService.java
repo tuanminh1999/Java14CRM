@@ -2,12 +2,9 @@ package cybersoft.javabackend.java14.crm.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import cybersoft.javabackend.java14.crm.entity.Project;
-import cybersoft.javabackend.java14.crm.entity.User;
 import cybersoft.javabackend.java14.crm.repository.ProjectRepository;
-import cybersoft.javabackend.java14.crm.util.SessionUtil;
+import cybersoft.javabackend.java14.crm.repository.UserRepository;
 
 public class ProjectService {
 	private ProjectRepository projectRepository;

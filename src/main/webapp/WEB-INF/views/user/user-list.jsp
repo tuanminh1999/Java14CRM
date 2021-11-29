@@ -38,9 +38,7 @@
 			<div class="row no-gutters">
 				<div class="col-lg-12 card-form__body border-left">
 
-					<div class="table-responsive border-bottom" data-toggle="lists"
-						data-lists-values='["js-lists-values-employee-name"]'>
-
+					<div data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>
 
 						<table class="table mb-0 thead-border-top-0">
 							<thead>

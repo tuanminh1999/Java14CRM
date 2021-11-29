@@ -3,6 +3,7 @@ package cybersoft.javabackend.java14.crm.service;
 import java.util.List;
 
 import cybersoft.javabackend.java14.crm.entity.User;
+import cybersoft.javabackend.java14.crm.repository.ProjectRepository;
 import cybersoft.javabackend.java14.crm.repository.UserRepository;
 
 public class UserService {
@@ -29,6 +30,8 @@ public class UserService {
 	}
 	
 	public boolean deleteUser(int id) {
+		ProjectRepository projectRepository = new ProjectRepository();
+		projectRepository.deleteByCreateBy(id);
 		return userRepository.deleteUser(id) == 1 ? true : false;
 	}
 	

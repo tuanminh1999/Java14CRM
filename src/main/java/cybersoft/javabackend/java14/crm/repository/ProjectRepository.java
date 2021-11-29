@@ -9,7 +9,6 @@ import java.util.List;
 
 import cybersoft.javabackend.java14.crm.db.MySQLConnection;
 import cybersoft.javabackend.java14.crm.entity.Project;
-import cybersoft.javabackend.java14.crm.entity.Role;
 import cybersoft.javabackend.java14.crm.entity.User;
 
 public class ProjectRepository {
@@ -109,6 +108,32 @@ public class ProjectRepository {
 			}
 		}
 		return null;
+	}
+	
+	public int deleteByCreateBy(int createBy) {
+		try {
+			connection = MySQLConnection.getConnection();
+			String query = "DELETE FROM crm_project WHERE create_by = ?";
+
+			statement = connection.prepareStatement(query);
+
+			statement.setInt(1, createBy);
+
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Không thể kết nối đến cơ sở dữ liệu");
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối");
+				e.printStackTrace();
+			}
+		}
+		return 0;
+
 	}
 
 	public int insertProject(Project project) {

@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Sign Up</title>
+<!-- Validate User -->
+<script src='<c:url value="assets/validate/validate-create-user.js" />'></script>
 </head>
-
 <body>
 	<h4 class="m-0">Sign up!</h4>
         <p class="mb-5">Create an account now!</p>
@@ -18,11 +19,11 @@
 					${message}
 				</div>
 		</c:if>
-        <form action="<c:url value='/sign-up'/>" method="post" novalidate>
+        <form action="<c:url value='/sign-up'/>" method="post" id="userForm" onsubmit="return validateUserForm()" novalidate>
             <div class="form-group">
                 <label class="text-label" for="name_2">Name:</label>
                 <div class="input-group input-group-merge">
-                    <input id="name_2" type="text" required class="form-control form-control-prepended" placeholder="John" name="name">
+                    <input id="name_2" type="text" class="form-control form-control-prepended" placeholder="John" name="name">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-user"></span>
@@ -33,7 +34,7 @@
             <div class="form-group">
                 <label class="text-label" for="email_2">Email Address:</label>
                 <div class="input-group input-group-merge">
-                    <input id="email_2" type="email" required class="form-control form-control-prepended" placeholder="john@doe.com" name="email">
+                    <input id="email_2" type="email" class="form-control form-control-prepended" placeholder="john@gmail.com" name="email">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-envelope"></span>
@@ -55,7 +56,7 @@
             <div class="form-group">
                 <label class="text-label" for="name_2">Phone:</label>
                 <div class="input-group input-group-merge">
-                    <input id="name_2" type="text" required class="form-control form-control-prepended" placeholder="0123456789" name="phone">
+                    <input id="name_2" type="text" class="form-control form-control-prepended" placeholder="0123456789" name="phone">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="fas fa-phone-square-alt"></span>
@@ -66,7 +67,7 @@
             <div class="form-group">
                 <label class="text-label" for="name_2">Address:</label>
                 <div class="input-group input-group-merge">
-                    <input id="name_2" type="text" required class="form-control form-control-prepended" placeholder="123 Trần Hưng Đạo Quận 1 TP.HCM" name="address">
+                    <input id="name_2" type="text" class="form-control form-control-prepended" placeholder="123 Trần Hưng Đạo Quận 1 TP.HCM" name="address">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-address-card"></span>

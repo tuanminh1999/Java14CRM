@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Create Project</title>
+<!-- Validate Project -->
+<script src='<c:url value="assets/validate/validate-create-project.js" />'></script>
 </head>
-
 <body>
 	<div class="container page__heading-container">
 	    <div class="page__heading">
@@ -14,7 +15,7 @@
 	            <div>
 	                <nav aria-label="breadcrumb">
 	                    <ol class="breadcrumb mb-0">
-	                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+	                        <li class="breadcrumb-item"><a href="<c:url value='/home'/>">Home</a></li>
 	                        <li class="breadcrumb-item active" aria-current="page">
 	                            Project
 	                        </li>
