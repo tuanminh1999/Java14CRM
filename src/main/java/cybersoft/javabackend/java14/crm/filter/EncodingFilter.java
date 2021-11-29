@@ -33,17 +33,5 @@ public class EncodingFilter implements Filter {
 		/*code được thực hiện khi trả về response */
 		resp.setCharacterEncoding("UTF-8");
 	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

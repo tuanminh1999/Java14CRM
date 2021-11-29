@@ -36,14 +36,11 @@ public class UserRepository {
 				user.setAddress(rs.getString("u.address"));
 				user.setRoleId(rs.getInt("u.role_id"));
 				
-				try {
-					Role role = new Role();
-					role.setName(rs.getString("r.name"));
-					role.setDescription(rs.getString("r.description"));
-					user.setRole(role);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				Role role = new Role();
+				role.setName(rs.getString("r.name"));
+				role.setDescription(rs.getString("r.description"));
+				user.setRole(role);
+			
 				
 				users.add(user);
 			}
@@ -83,14 +80,10 @@ public class UserRepository {
 				user.setAddress(rs.getString("u.address"));
 				user.setRoleId(rs.getInt("u.role_id"));
 				
-				try {
-					Role role = new Role();
-					role.setName(rs.getString("r.name"));
-					role.setDescription(rs.getString("r.description"));
-					user.setRole(role);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				Role role = new Role();
+				role.setName(rs.getString("r.name"));
+				role.setDescription(rs.getString("r.description"));
+				user.setRole(role);
 				
 				return user;
 			}
@@ -197,5 +190,54 @@ public class UserRepository {
 		}
 		return 0;
 
+	}
+	
+	public User checkLogIn(String email, String password) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+
+		try {
+			connection = MySQLConnection.getConnection();
+			StringBuilder query = new StringBuilder("SELECT u.id, u.name, u.email, u.password, u.phone, u.address, u.role_id, ");
+			query.append("r.id, r.name, r.description FROM crm_user AS u INNER JOIN crm_role AS r ON u.role_id = r.id ");
+			query.append(" WHERE email = ?, password = ?");
+			statement = connection.prepareStatement(query.toString());
+			statement.setString(1, email);
+			statement.setString(2, password);
+			rs = statement.executeQuery();
+
+			while (rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt("u.id"));
+				user.setName(rs.getString("u.name"));
+				user.setEmail(rs.getString("u.email"));
+				user.setPassword(rs.getString("u.password"));
+				user.setPhone(rs.getString("u.phone"));
+				user.setAddress(rs.getString("u.address"));
+				user.setRoleId(rs.getInt("u.role_id"));
+				
+				Role role = new Role();
+				role.setName(rs.getString("r.name"));
+				role.setDescription(rs.getString("r.description"));
+				user.setRole(role);
+			
+				
+				return user;
+			}
+		} catch (SQLException e) {
+			System.out.println("Không thể kết nối đến cơ sở dữ liệu");
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+				rs.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối");
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 }

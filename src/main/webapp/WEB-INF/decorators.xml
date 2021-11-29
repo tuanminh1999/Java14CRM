@@ -4,7 +4,7 @@
 		<pattern>/*</pattern>
 	</decorator>
 	
-	<decorator name="web" page="login.jsp">
-		<pattern>/login</pattern>
+	<decorator name="login" page="login.jsp">
+		<pattern>/sign*</pattern>
 	</decorator>
 </decorators>

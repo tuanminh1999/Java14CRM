@@ -32,4 +32,8 @@ public class UserService {
 		return userRepository.deleteUser(id) == 1 ? true : false;
 	}
 	
+	public User checkLogIn(String email, String password) {
+		return userRepository.checkLogIn(email, password);
+	}
+	
 }
