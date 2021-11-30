@@ -25,7 +25,7 @@ public class ProjectService {
 	}
 	
 	public Project updateProject(Project project) {
-		project.setCreateBy(project.getUser().getRoleId());
+		project.setCreateBy(findOneByProjectId(project.getId()).getCreateBy());
 		return projectRepository.updateProject(project) == 1 ? findOneByProjectId(project.getId()) : null;
 	}
 	

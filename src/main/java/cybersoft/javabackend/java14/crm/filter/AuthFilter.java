@@ -15,8 +15,6 @@ import cybersoft.javabackend.java14.crm.entity.User;
 import cybersoft.javabackend.java14.crm.util.SessionUtil;
 import cybersoft.javabackend.java14.crm.util.UrlConst;
 
-
-
 @WebFilter(urlPatterns = { UrlConst.ROOT })
 public class AuthFilter implements Filter {
 
@@ -25,37 +23,35 @@ public class AuthFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
-		String url = request.getRequestURI(); // lấy link hiện tại đang request vào.
+		String url = request.getRequestURI(); // GET PRESENT LINK
 		User user = ((User) SessionUtil.getInstance().getValue(request, "login"));
 		// MEMBER
-		if (url.startsWith(request.getContextPath()+UrlConst.CREATE_PROJECT) ||
-				url.startsWith(request.getContextPath()+UrlConst.MANAGE_PROJECT) ||
-				url.startsWith(request.getContextPath()+UrlConst.CREATE_USER) ||
-				url.startsWith(request.getContextPath()+UrlConst.USER_LIST)) {
+		if (url.startsWith(request.getContextPath() + UrlConst.CREATE_PROJECT)
+				|| url.startsWith(request.getContextPath() + UrlConst.MANAGE_PROJECT)
+				|| url.startsWith(request.getContextPath() + UrlConst.CREATE_USER)
+				|| url.startsWith(request.getContextPath() + UrlConst.USER_LIST)) {
 			if (user != null) {
-				if(user.getRole().getName().equalsIgnoreCase("MEMBER")) {
-					response.sendRedirect(request.getContextPath() + UrlConst.HOME);
-				} else if ((user.getRole().getName().equalsIgnoreCase("LEADER") && (url.startsWith(request.getContextPath()+UrlConst.CREATE_PROJECT) ||
-						url.startsWith(request.getContextPath()+UrlConst.MANAGE_PROJECT)))){
-					response.sendRedirect(request.getContextPath() + UrlConst.HOME);
-				}else {
+				if(url.startsWith(request.getContextPath() + UrlConst.CREATE_USER) && request.getQueryString() != null) {// ALL USER ARE ACCESSED EDIT PROFILE
 					chain.doFilter(request, response);
 				}
-			}else {
+				else if (user.getRole().getName().equalsIgnoreCase("MEMBER")) { // MEMBER IS ACCESSED TO HOME AND TASK
+					response.sendRedirect(request.getContextPath() + UrlConst.HOME);
+				}else{ // ADMIN, LEADER ARE FULL ACCESS TO WEB
+					chain.doFilter(request, response);
+				}
+			} else {
 				response.sendRedirect(request.getContextPath() + UrlConst.SIGN_IN);
 			}
-		} 
-		else {
-			if (request.getSession().getAttribute("login") != null) {
+		}else {
+			if (user != null) {
 				chain.doFilter(request, response);
-			} else if (UrlConst.SIGN_IN.equals(request.getServletPath())) {
+			} else if (UrlConst.SIGN_IN.equals(request.getServletPath()) || UrlConst.SIGN_UP.equals(request.getServletPath())) {
 				chain.doFilter(request, response);
 			} else {
 				response.sendRedirect(request.getContextPath() + UrlConst.SIGN_IN);
 			}
 		}
 
-		
 	}
 
 }

@@ -54,42 +54,68 @@
 							</thead>
 							<tbody class="list" id="staff02">
 								<c:forEach var="user" items="${users}">
-								<tr>
-									<td>${user.name}</td>
-									<c:choose>
-										<c:when test="${user.role.name eq 'ADMIN' }">
-											<td><span class="badge badge-warning">${user.role.name }</span></td>
-										</c:when>
-										<c:when test="${user.role.name eq 'LEADER' }">
-											<td><span class="badge badge-primary">${user.role.name }</span></td>
-										</c:when>
-										<c:when test="${user.role.name eq 'MEMBER' }">
-											<td><span class="badge badge-success">${user.role.name }</span></td>
-										</c:when>
-									</c:choose>
-									<td>${user.email}</td>
-									<td>${user.phone}</td>
-									<td>${user.address}</td>
-									<td>
-										<a type="button" class="btn btn-secondary" data-toggle="tooltip" title='Edit User'
-										   href="<c:url value='/create-user?id=${user.id }'/>">
-                                        	<i class="fas fa-edit"></i>
-                                    	</a>
-									</td>
-									<td>
-										<form action="<c:url value='/user-list'/>">
-											<input type="hidden" name="id" value="${user.id }">
-											<button type="submit" class="btn btn-danger" data-toggle="tooltip" title='Delete User'>
-	                                       		<i class="fas fa-times"></i>
-	                                  		</button>
-                                  		</form>
-									</td>
-								</tr>
-								</c:forEach>
-
-							</tbody>
-						</table>
-					</div>
+										<c:if test="${login.role.name eq 'LEADER' && user.role.name ne 'ADMIN' && user.role.name ne 'LEADER'}">
+											<tr>
+												<td>${user.name}</td>
+												<td><span class="badge badge-success">${user.role.name }</span></td>
+												<td>${user.email}</td>
+												<td>${user.phone}</td>
+												<td>${user.address}</td>
+												<td>
+													<a type="button" class="btn btn-secondary" data-toggle="tooltip" title='Edit User'
+													   href="<c:url value='/create-user?id=${user.id }'/>">
+			                                        	<i class="fas fa-edit"></i>
+			                                    	</a>
+												</td>
+												<td>
+													<form action="<c:url value='/user-list'/>">
+														<input type="hidden" name="id" value="${user.id }">
+														<button type="submit" class="btn btn-danger" data-toggle="tooltip" title='Delete User'>
+				                                       		<i class="fas fa-times"></i>
+				                                  		</button>
+			                                  		</form>
+												</td>
+											</tr>
+										</c:if>
+										
+										<c:if test="${login.role.name eq 'ADMIN'}">
+											<tr>
+												<td>${user.name}</td>
+												<c:choose>
+													<c:when test="${user.role.name eq 'ADMIN' }">
+														<td><span class="badge badge-warning">${user.role.name }</span></td>
+													</c:when>
+													<c:when test="${user.role.name eq 'LEADER' }">
+														<td><span class="badge badge-primary">${user.role.name }</span></td>
+													</c:when>
+													<c:when test="${user.role.name eq 'MEMBER' }">
+														<td><span class="badge badge-success">${user.role.name }</span></td>
+													</c:when>
+												</c:choose>
+												<td>${user.email}</td>
+												<td>${user.phone}</td>
+												<td>${user.address}</td>
+												<td>
+													<a type="button" class="btn btn-secondary" data-toggle="tooltip" title='Edit User'
+													   href="<c:url value='/create-user?id=${user.id }'/>">
+			                                        	<i class="fas fa-edit"></i>
+			                                    	</a>
+												</td>
+												<td>
+													<form action="<c:url value='/user-list'/>">
+														<input type="hidden" name="id" value="${user.id }">
+														<button type="submit" class="btn btn-danger" data-toggle="tooltip" title='Delete User'>
+				                                       		<i class="fas fa-times"></i>
+				                                  		</button>
+			                                  		</form>
+												</td>
+											</tr>
+										</c:if>
+									</c:forEach>
+	
+								</tbody>
+							</table>
+						</div>
 				</div>
 			</div>
 		</div>

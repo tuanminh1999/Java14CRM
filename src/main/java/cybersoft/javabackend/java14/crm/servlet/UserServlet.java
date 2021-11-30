@@ -60,7 +60,12 @@ public class UserServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phone");
-		int roleId = Integer.parseInt(request.getParameter("roleId"));
+		int roleId;
+		if(request.getParameter("roleId") != null) {
+			roleId = Integer.parseInt(request.getParameter("roleId"));
+		}else {
+			roleId = 3;
+		}
 
 		User user = new User();
 		user.setName(name);
@@ -69,8 +74,8 @@ public class UserServlet extends HttpServlet {
 		user.setPassword(password);
 		user.setPhone(phone);
 		user.setRoleId(roleId);
-		
-		if(request.getParameter("id") == null) { // Add User
+
+		if (request.getParameter("id") == null) { // Add User
 			if (userService.insertUser(user)) {
 				request.setAttribute("message", "Thêm thành công");
 				request.setAttribute("alert", "success");
@@ -78,7 +83,7 @@ public class UserServlet extends HttpServlet {
 				request.setAttribute("message", "Thêm thất bại công");
 				request.setAttribute("alert", "danger");
 			}
-		}else { // Edit User
+		} else { // Edit User
 			int id = Integer.parseInt(request.getParameter("id"));
 			user.setId(id);
 			User newUser = userService.updateUser(user);
@@ -91,7 +96,7 @@ public class UserServlet extends HttpServlet {
 				request.setAttribute("alert", "danger");
 				request.setAttribute("user", user);
 			}
-			
+
 		}
 		request.setAttribute("roles", roleService.getRole());
 		request.getRequestDispatcher(JspConst.CREATE_USER).forward(request, response);

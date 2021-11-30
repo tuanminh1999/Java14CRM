@@ -25,5 +25,6 @@ public class UrlConst {
 	
 	/* USER */
 	public static final String CREATE_USER = "/create-user";
+	public static final String EDIT_USER = "/edit-user";
 	public static final String USER_LIST = "/user-list";
 }

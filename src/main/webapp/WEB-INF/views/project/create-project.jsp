@@ -88,7 +88,7 @@
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Create By</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" value="${project.user.name }" readonly="readonly"/>
+					<input type="text" class="form-control" value="${project.user.email }" readonly="readonly"/>
 				</div>
 			</div>
 			</c:if>
