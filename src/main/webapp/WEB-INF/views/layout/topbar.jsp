@@ -128,13 +128,13 @@
                                 <div>${login.email }</div>
                             </div>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item active" href="dashboard.html">
+                            <!-- <a class="dropdown-item active" href="dashboard.html">
                                 Dashboard
                             </a>
                             <a class="dropdown-item" href="profile.html">
                                 My profile
-                            </a>
-                            <a class="dropdown-item" href="account-edit.html">
+                            </a> -->
+                            <a class="dropdown-item" href='<c:url value="/create-user?id=${login.id }"/>'>
                                 Edit account
                             </a>
                             <div class="dropdown-divider"></div>

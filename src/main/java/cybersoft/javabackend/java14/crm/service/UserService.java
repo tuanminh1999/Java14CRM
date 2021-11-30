@@ -18,6 +18,11 @@ public class UserService {
 	}
 	
 	public boolean insertUser(User user) {
+		for(User object : getUser()) {
+			if(object.getEmail().equals(user.getEmail())) {
+				return false;
+			}
+		}
 		return userRepository.insertUser(user) == 1 ? true : false;
 	}
 	

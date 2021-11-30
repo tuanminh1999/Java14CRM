@@ -60,61 +60,62 @@
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Name</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="name" value="${user.name }"/>
+					<input type="text" class="form-control" name="name" value="${user.name }" placeholder="John"/>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Email</label>
 				<div class="col-sm-7">
-					<input type="email" class="form-control" name="email" value="${user.email }"/>
+					<input type="email" class="form-control" name="email" value="${user.email }" placeholder="john@gmail.com"/>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Password</label>
 				<div class="col-sm-7">
-					<input type="password" class="form-control" name="password" value="${user.password }"/>
+					<input type="password" class="form-control" name="password" value="${user.password }" placeholder="Enter your password"/>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Phone</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="phone" value="${user.phone }"/>
+					<input type="text" class="form-control" name="phone" value="${user.phone }" placeholder="0123456789"/>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Address</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="address" value="${user.address }"/>
+					<input type="text" class="form-control" name="address" value="${user.address }" placeholder="123 Trần Hưng Đạo"/>
 				</div>
 			</div>
-
-			<div class="form-group">
-				<label class="col-sm-8 control-label no-padding-right">Role</label>
-				<div class="col-sm-4">
-					<select class="form-control" name="roleId">
-						<c:if test="${empty user.role.name }"> <%-- Create User --%>
-							<c:forEach var="item" items="${roles }">
-								<option value="${item.id }">${item.name }</option>
-							</c:forEach>
-						</c:if>
-						<c:if test="${not empty user.role.name }"> <%-- Edit User --%>
-							<c:forEach var="item" items="${roles }">
-								<c:if test="${user.role.name eq item.name }">
-									<option value="${item.id }" selected="selected">${item.name }
-									</option>
-								</c:if>
-								<c:if test="${user.role.name ne item.name }">
+			<c:if test="${login.role.name eq 'ADMIN' }">
+				<div class="form-group">
+					<label class="col-sm-8 control-label no-padding-right">Role</label>
+					<div class="col-sm-4">
+						<select class="form-control" name="roleId">
+							<c:if test="${empty user.role.name }"> <%-- Create User --%>
+								<c:forEach var="item" items="${roles }">
 									<option value="${item.id }">${item.name }</option>
-								</c:if>
-							</c:forEach>
-						</c:if>
-					</select>
+								</c:forEach>
+							</c:if>
+							<c:if test="${not empty user.role.name }"> <%-- Edit User --%>
+								<c:forEach var="item" items="${roles }">
+									<c:if test="${user.role.name eq item.name }">
+										<option value="${item.id }" selected="selected">${item.name }
+										</option>
+									</c:if>
+									<c:if test="${user.role.name ne item.name }">
+										<option value="${item.id }">${item.name }</option>
+									</c:if>
+								</c:forEach>
+							</c:if>
+						</select>
+					</div>
 				</div>
-			</div>
+			</c:if>
 			<div class="col-sm-12">
 				<c:if test="${user.id == null }">
 					<input type="submit" class="btn btn-primary" value="Create User">

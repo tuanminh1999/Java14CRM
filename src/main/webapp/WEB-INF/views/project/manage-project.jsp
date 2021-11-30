@@ -55,28 +55,53 @@
 							</thead>
 							<tbody class="list" id="staff02">
 								<c:forEach var="project" items="${projects}">
-								<tr>
+									<c:if test="${login.role.name eq 'LEADER' && project.user.email eq login.email}">
+										<tr>
+											<td>${project.name}</td>
+											<td>${project.description}</td>
+											<td>${project.startDate}</td>
+											<td>${project.endDate}</td>
+											<td>${project.user.email }</td>
+											<td>
+												<a type="button" class="btn btn-secondary" data-toggle="tooltip" title='Edit Project'
+												   href="<c:url value='/create-project?id=${project.id }'/>">
+		                                        	<i class="fas fa-edit"></i>
+		                                    	</a>
+											</td>
+											<td>
+												<form action="<c:url value='/manage-project'/>">
+													<input type="hidden" name="id" value="${project.id }">
+													<button type="submit" class="btn btn-danger" data-toggle="tooltip" title='Delete Project'>
+			                                       		<i class="fas fa-times"></i>
+			                                  		</button>
+		                                  		</form>
+											</td>
+										</tr>
+									</c:if>
 									
-									<td>${project.name}</td>
-									<td>${project.description}</td>
-									<td>${project.startDate}</td>
-									<td>${project.endDate}</td>
-									<td>${project.user.name }</td>
-									<td>
-										<a type="button" class="btn btn-secondary" data-toggle="tooltip" title='Edit Project'
-										   href="<c:url value='/create-project?id=${project.id }'/>">
-                                        	<i class="fas fa-edit"></i>
-                                    	</a>
-									</td>
-									<td>
-										<form action="<c:url value='/manage-project'/>">
-											<input type="hidden" name="id" value="${project.id }">
-											<button type="submit" class="btn btn-danger" data-toggle="tooltip" title='Delete Project'>
-	                                       		<i class="fas fa-times"></i>
-	                                  		</button>
-                                  		</form>
-									</td>
-								</tr>
+									<c:if test="${login.role.name eq 'ADMIN'}">
+										<tr>
+											<td>${project.name}</td>
+											<td>${project.description}</td>
+											<td>${project.startDate}</td>
+											<td>${project.endDate}</td>
+											<td>${project.user.email }</td>
+											<td>
+												<a type="button" class="btn btn-secondary" data-toggle="tooltip" title='Edit Project'
+												   href="<c:url value='/create-project?id=${project.id }'/>">
+		                                        	<i class="fas fa-edit"></i>
+		                                    	</a>
+											</td>
+											<td>
+												<form action="<c:url value='/manage-project'/>">
+													<input type="hidden" name="id" value="${project.id }">
+													<button type="submit" class="btn btn-danger" data-toggle="tooltip" title='Delete Project'>
+			                                       		<i class="fas fa-times"></i>
+			                                  		</button>
+		                                  		</form>
+											</td>
+										</tr>
+									</c:if>
 								</c:forEach>
 
 							</tbody>

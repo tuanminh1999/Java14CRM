@@ -80,7 +80,7 @@ public class AuthServlet extends HttpServlet {
 				request.setAttribute("message", "Đăng ký thành công");
 				request.setAttribute("alert", "success");
 			} else {
-				request.setAttribute("message", "Đăng nhập thất bại");
+				request.setAttribute("message", "Đăng ký thất bại");
 				request.setAttribute("alert", "danger");
 			}
 			request.getRequestDispatcher(JspConst.SIGN_UP).forward(request, response);
