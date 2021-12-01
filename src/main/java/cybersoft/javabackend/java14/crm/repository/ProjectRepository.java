@@ -20,7 +20,7 @@ public class ProjectRepository {
 		List<Project> projects = new LinkedList<Project>();
 		try {
 			connection = MySQLConnection.getConnection();
-			StringBuilder query = new StringBuilder("SELECT p.id, p.name, p.description, p.start_date, p.end_date, p.create_by, u.id, ");
+			StringBuilder query = new StringBuilder("SELECT p.id, p.name, p.description, p.start_date, p.end_date, p.create_by, ");
 			query.append("u.name, u.email, u.password, u.phone, u.address, u.role_id FROM crm_project AS p INNER JOIN crm_user AS u ");
 			query.append("ON p.create_by = u.id ORDER BY p.id ASC");
 			
@@ -37,7 +37,6 @@ public class ProjectRepository {
 				project.setCreateBy(rs.getInt("p.create_by"));
 				
 				User user = new User();
-				user.setId(rs.getInt("u.id"));
 				user.setName(rs.getString("u.name"));
 				user.setEmail(rs.getString("u.email"));
 				user.setPassword(rs.getString("u.password"));

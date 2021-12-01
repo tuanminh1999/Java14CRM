@@ -25,7 +25,7 @@
                     <input id="email_2" type="email" required class="form-control form-control-prepended" placeholder="john@gmail.com" name="email">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <span class="far fa-envelope"></span>
+                             <span class="far fa-envelope"></span>
                         </div>
                     </div>
                 </div>

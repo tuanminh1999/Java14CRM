@@ -21,7 +21,8 @@ public class UrlConst {
 	public static final String MANAGE_PROJECT = "/manage-project";
 	
 	/* TASK */
-	public static final String TASK = "/task-list";
+	public static final String TASK_LIST = "/task-list";
+	public static final String CREATE_TASK = "/create-task";
 	
 	/* USER */
 	public static final String CREATE_USER = "/create-user";
