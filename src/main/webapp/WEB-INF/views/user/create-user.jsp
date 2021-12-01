@@ -4,7 +4,12 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Create User</title>
+<c:if test="${user.id == null }">
+	<title>Create User</title>
+</c:if>
+<c:if test="${user.id != null }">
+	<title>Edit User</title>
+</c:if>
 <!-- Validate User -->
 <script src='<c:url value="assets/validate/validate-create-user.js" />'></script>
 </head>

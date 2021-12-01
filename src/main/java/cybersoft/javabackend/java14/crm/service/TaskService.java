@@ -15,4 +15,8 @@ public class TaskService {
 	public List<Task> getTask() {
 		return taskRepository.getTask();
 	}
+	
+	public Task findOneByTaskId(int id) {
+		return taskRepository.findOneByTaskId(id);
+	}
 }

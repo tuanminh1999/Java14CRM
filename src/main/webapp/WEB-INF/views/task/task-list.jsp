@@ -43,7 +43,7 @@
 							<thead>
 								<tr>
 									<th>Name</th>
-									<th>Start Date</th>
+									<th>Assignee</th>
 									<th>End Date</th>
 									<th>Project</th>
 									<th>Status</th>
@@ -56,7 +56,7 @@
 									<c:if test="${login.role.name eq 'LEADER' && task.project.createBy eq login.id}">
 										<tr>
 											<td>${task.name}</td>
-											<td>${task.startDate}</td>
+											<td>${task.user.email }</td>
 											<td>${task.endDate}</td>
 											<td>${task.project.name}</td>
 											<td>${task.status.name }</td>
@@ -80,7 +80,7 @@
 									<c:if test="${login.role.name eq 'ADMIN'}">
 										<tr>
 											<td>${task.name}</td>
-											<td>${task.startDate}</td>
+											<td>${task.user.email }</td>
 											<td>${task.endDate}</td>
 											<td>${task.project.name}</td>
 											<c:choose>
@@ -114,7 +114,7 @@
 									<c:if test="${login.role.name eq 'MEMBER'}">
 										<tr>
 											<td>${task.name}</td>
-											<td>${task.startDate}</td>
+											<td>${task.user.email }</td>
 											<td>${task.endDate}</td>
 											<td>${task.project.name}</td>
 											<c:choose>

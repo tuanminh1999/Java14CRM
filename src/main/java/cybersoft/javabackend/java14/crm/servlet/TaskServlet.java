@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cybersoft.javabackend.java14.crm.service.ProjectService;
+import cybersoft.javabackend.java14.crm.service.StatusService;
 import cybersoft.javabackend.java14.crm.service.TaskService;
 import cybersoft.javabackend.java14.crm.service.UserService;
 import cybersoft.javabackend.java14.crm.util.JspConst;
@@ -22,12 +24,16 @@ public class TaskServlet extends HttpServlet{
 	private static final long serialVersionUID = -4094289534816596435L;
 	private TaskService taskService;
 	private UserService userService;
+	private StatusService statusService;
+	private ProjectService projectService;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		taskService = new TaskService();
 		userService = new UserService();
+		statusService = new StatusService();
+		projectService = new ProjectService();
 	}
 	
 	@Override
@@ -45,14 +51,15 @@ public class TaskServlet extends HttpServlet{
 			request.getRequestDispatcher(JspConst.TASK_LIST).forward(request, response);
 			break;
 		case UrlConst.CREATE_TASK:
-//			if (request.getParameter("id") != null) {
-//				int userId = Integer.parseInt(request.getParameter("id"));
-//				request.setAttribute("user", userService.findOneByUserId(userId));
-//			}
-//			request.setAttribute("roles", roleService.getRole());
+			if (request.getParameter("id") != null) {
+				int taskId = Integer.parseInt(request.getParameter("id"));
+				request.setAttribute("task", taskService.findOneByTaskId(taskId));
+			}
+			request.setAttribute("users", userService.findByRoleId(3));
+			request.setAttribute("projects", projectService.getProject());
+			request.setAttribute("statuses", statusService.getStatus());
 			request.getRequestDispatcher(JspConst.CREATE_TASK).forward(request, response);
 			break;
 		}
-		//request.getRequestDispatcher(JspConst.TASK_LIST).forward(request, response);
 	}
 }

@@ -4,7 +4,12 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Create Project</title>
+<c:if test="${project.id == null }">
+	<title>Create Project</title>
+</c:if>
+<c:if test="${project.id != null }">
+	<title>Edit Project</title>
+</c:if>
 <!-- Validate Project -->
 <script src='<c:url value="assets/validate/validate-create-project.js" />'></script>
 </head>

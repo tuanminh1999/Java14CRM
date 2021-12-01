@@ -13,6 +13,7 @@ public class Task {
 	private int projectId;
 	private Status status;
 	private Project project;
+	private User user;
 
 	public int getId() {
 		return id;
@@ -92,6 +93,14 @@ public class Task {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

@@ -4,7 +4,12 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Create User</title>
+<c:if test="${task.id == null }">
+	<title>Create Task</title>
+</c:if>
+<c:if test="${task.id != null }">
+	<title>Edit Task</title>
+</c:if>
 <!-- Validate User -->
 <script src='<c:url value="assets/validate/validate-create-user.js" />'></script>
 </head>
@@ -19,21 +24,21 @@
 							<li class="breadcrumb-item"><a href="<c:url value='/home'/>">Home</a></li>
 							<li class="breadcrumb-item active" aria-current="page">User
 							</li>
-							<c:if test="${user.id == null }">
+							<c:if test="${task.id == null }">
 								<li class="breadcrumb-item active" aria-current="page">
-								Create User</li>
+								Create Task</li>
 							</c:if>
-							<c:if test="${user.id != null }">
+							<c:if test="${task.id != null }">
 								<li class="breadcrumb-item active" aria-current="page">
-								Edit User</li>
+								Edit Task</li>
 							</c:if>
 						</ol>
 					</nav>
-					<c:if test="${user.id == null }">
-						<h1 class="m-0">Create User</h1>
+					<c:if test="${task.id == null }">
+						<h1 class="m-0">Create Task</h1>
 					</c:if>
-					<c:if test="${user.id != null }">
-						<h1 class="m-0">Edit User</h1>
+					<c:if test="${task.id != null }">
+						<h1 class="m-0">Edit Task</h1>
 					</c:if>
 				</div>
 				<div class="ml-auto">
@@ -60,69 +65,110 @@
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Name</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="name" value="${user.name }" placeholder="John"/>
+					<input type="text" class="form-control" name="name" value="${task.name }" placeholder="John"/>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-5 control-label no-padding-right">Description</label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" name="description" value="${task.description }" placeholder="Enter your description"/>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-5 control-label no-padding-right">Email</label>
+				<label class="col-sm-5 control-label no-padding-right">Assignee Email</label>
 				<div class="col-sm-7">
-					<input type="email" class="form-control" name="email" value="${user.email }" placeholder="john@gmail.com"/>
+					<select class="form-control" name="roleId">
+						<c:if test="${empty task.id }"> <%-- Create User --%>
+							<c:forEach var="item" items="${users }">
+								<option value="${item.id }">${item.email }</option>
+							</c:forEach>
+						</c:if>
+						<c:if test="${not empty task.id }"> <%-- Edit User --%>
+							<c:forEach var="item" items="${users }">
+								<c:if test="${task.user.email eq item.email }">
+									<option value="${item.id }" selected="selected">${item.email }
+									</option>
+								</c:if>
+								<c:if test="${task.user.email ne item.email }">
+									<option value="${item.id }">${item.email }</option>
+								</c:if>
+							</c:forEach>
+						</c:if>
+					</select>
 				</div>
 			</div>
-
+			
 			<div class="form-group">
-				<label class="col-sm-5 control-label no-padding-right">Password</label>
+				<label class="col-sm-5 control-label no-padding-right">Project</label>
 				<div class="col-sm-7">
-					<input type="password" class="form-control" name="password" value="${user.password }" placeholder="Enter your password"/>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-sm-5 control-label no-padding-right">Phone</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" name="phone" value="${user.phone }" placeholder="0123456789"/>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-sm-5 control-label no-padding-right">Address</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" name="address" value="${user.address }" placeholder="123 Trần Hưng Đạo"/>
-				</div>
-			</div>
-			<c:if test="${login.role.name eq 'ADMIN' }">
-				<div class="form-group">
-					<label class="col-sm-8 control-label no-padding-right">Role</label>
-					<div class="col-sm-4">
-						<select class="form-control" name="roleId">
-							<c:if test="${empty user.role.name }"> <%-- Create User --%>
-								<c:forEach var="item" items="${roles }">
+					<select class="form-control" name="roleId">
+						<c:if test="${empty task.id }"> <%-- Create User --%>
+							<c:forEach var="item" items="${projects }">
+								<option value="${item.id }">${item.name }</option>
+							</c:forEach>
+						</c:if>
+						<c:if test="${not empty task.id }"> <%-- Edit User --%>
+							<c:forEach var="item" items="${projects }">
+								<c:if test="${task.project.name eq item.name }">
+									<option value="${item.id }" selected="selected">${item.name }
+									</option>
+								</c:if>
+								<c:if test="${task.project.name ne item.name }">
 									<option value="${item.id }">${item.name }</option>
-								</c:forEach>
-							</c:if>
-							<c:if test="${not empty user.role.name }"> <%-- Edit User --%>
-								<c:forEach var="item" items="${roles }">
-									<c:if test="${user.role.name eq item.name }">
-										<option value="${item.id }" selected="selected">${item.name }
-										</option>
-									</c:if>
-									<c:if test="${user.role.name ne item.name }">
-										<option value="${item.id }">${item.name }</option>
-									</c:if>
-								</c:forEach>
-							</c:if>
-						</select>
-					</div>
+								</c:if>
+							</c:forEach>
+						</c:if>
+					</select>
 				</div>
-			</c:if>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-5 control-label no-padding-right">Start Date</label>
+				<div class="col-sm-7">
+					<input type="date" class="form-control" name="startDate" value="${task.startDate }"/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-5 control-label no-padding-right">End Date</label>
+				<div class="col-sm-7">
+					<input type="date" class="form-control" name="endDate" value="${task.endDate }"/>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-5 control-label no-padding-right">Status</label>
+				<div class="col-sm-7">
+					<select class="form-control" name="statusId">
+						<c:if test="${empty task.id }"> <%-- Create User --%>
+							<c:forEach var="item" items="${statuses }">
+								<option value="${item.id }">${item.name }</option>
+							</c:forEach>
+						</c:if>
+						<c:if test="${not empty task.id }"> <%-- Edit User --%>
+							<c:forEach var="item" items="${statuses }">
+								<c:if test="${task.statusId eq item.id }">
+									<option value="${item.id }" selected="selected">${item.name }
+									</option>
+								</c:if>
+								<c:if test="${task.statusId ne item.id }">
+									<option value="${item.id }">${item.name }</option>
+								</c:if>
+							</c:forEach>
+						</c:if>
+					</select>
+				</div>
+			</div>
+			
 			<div class="col-sm-12">
-				<c:if test="${user.id == null }">
-					<input type="submit" class="btn btn-primary" value="Create User">
+				<c:if test="${task.id == null }">
+					<input type="submit" class="btn btn-primary" value="Create Task">
 				</c:if>
-				<c:if test="${user.id != null }">
-					<input type="hidden" name="id" value="${user.id }" />
-					<input type="submit" class="btn btn-primary" value="Edit User">
+				<c:if test="${task.id != null }">
+					<input type="hidden" name="id" value="${task.id }" />
+					<input type="submit" class="btn btn-primary" value="Edit Task">
 				</c:if>
 			</div>
 		</form>
