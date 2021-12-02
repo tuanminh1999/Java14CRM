@@ -270,7 +270,7 @@
 						Date</label>
 					<div class="col-sm-7">
 						<input type="date" class="form-control" name="startDate"
-							value="${task.startDate }" disabled="disabled" />
+							value="${task.startDate }" />
 					</div>
 				</div>
 
@@ -279,12 +279,10 @@
 						Date</label>
 					<div class="col-sm-7">
 						<input type="date" class="form-control" name="endDate"
-							value="${task.endDate }" disabled="disabled" />
+							value="${task.endDate }"/>
 					</div>
 				</div>
 			</c:if>
-
-
 
 			<div class="form-group">
 				<label class="col-sm-5 control-label no-padding-right">Status</label>

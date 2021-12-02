@@ -59,16 +59,26 @@
 											<td>${task.user.email }</td>
 											<td>${task.endDate}</td>
 											<td>${task.project.name}</td>
-											<td>${task.status.name }</td>
+											<c:choose>
+													<c:when test="${task.status.name eq 'CHƯA THỰC HIỆN' }">
+														<td><span class="badge badge-warning">${task.status.name }</span></td>
+													</c:when>
+													<c:when test="${task.status.name eq 'ĐANG THỰC HIỆN' }">
+														<td><span class="badge badge-primary">${task.status.name }</span></td>
+													</c:when>
+													<c:when test="${task.status.name eq 'HOÀN THÀNH' }">
+														<td><span class="badge badge-success">${task.status.name }</span></td>
+													</c:when>
+											</c:choose>
 											<td>
 												<a type="button" class="btn btn-secondary" data-toggle="tooltip" title='Edit Project'
-												   href="<c:url value='/create-project?id=${project.id }'/>">
+												   href="<c:url value='/create-task?id=${task.id }'/>">
 		                                        	<i class="fas fa-edit"></i>
 		                                    	</a>
 											</td>
 											<td>
-												<form action="<c:url value='/manage-project'/>">
-													<input type="hidden" name="id" value="${project.id }">
+												<form action="<c:url value='/task-list'/>">
+													<input type="hidden" name="id" value="${task.id }">
 													<button type="submit" class="btn btn-danger" data-toggle="tooltip" title='Delete Project'>
 			                                       		<i class="fas fa-times"></i>
 			                                  		</button>
@@ -93,7 +103,7 @@
 													<c:when test="${task.status.name eq 'HOÀN THÀNH' }">
 														<td><span class="badge badge-success">${task.status.name }</span></td>
 													</c:when>
-												</c:choose>
+											</c:choose>
 											<td>
 												<a type="button" class="btn btn-secondary" data-toggle="tooltip" title='Edit Task'
 												   href="<c:url value='/create-task?id=${task.id }'/>">
