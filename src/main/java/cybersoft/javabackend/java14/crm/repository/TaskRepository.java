@@ -103,6 +103,7 @@ public class TaskRepository {
 				task.setStartDate(rs.getDate("t.start_date"));
 				task.setEndDate(rs.getDate("t.end_date"));
 				task.setName(rs.getString("t.name"));
+				task.setProjectId(rs.getInt("t.project_id"));
 				task.setStatusId(rs.getInt("t.status_id"));
 				
 				Status status = new Status();
@@ -144,4 +145,96 @@ public class TaskRepository {
 		}
 		return null;
 	}
+	
+	public int insertTask(Task task) {
+		try {
+			connection = MySQLConnection.getConnection();
+			String query = "INSERT INTO crm_task(name, assignee ,description, start_date, end_date, project_id, status_id) VALUES (?,?,?,?,?,?,?)";
+
+			statement = connection.prepareStatement(query);
+
+			statement.setString(1, task.getName());
+			statement.setInt(2, task.getAssignee());
+			statement.setString(3, task.getDescription());
+			statement.setDate(4, task.getStartDate());
+			statement.setDate(5, task.getEndDate());
+			statement.setInt(6, task.getProjectId());
+			statement.setInt(7, task.getStatusId());
+
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Không thể kết nối đến cơ sở dữ liệu");
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối");
+				e.printStackTrace();
+			}
+		}
+		return 0;
+
+	}
+	
+	public int updateTask(Task task) {
+		try {
+			connection = MySQLConnection.getConnection();
+			String query = "UPDATE crm_task SET name = ?, assignee = ?, description = ?, start_date = ?, end_date = ?, project_id = ?, status_id = ? WHERE id = ?";
+
+			statement = connection.prepareStatement(query);
+
+			statement.setString(1, task.getName());
+			statement.setInt(2, task.getAssignee());
+			statement.setString(3, task.getDescription());
+			statement.setDate(4, task.getStartDate());
+			statement.setDate(5, task.getEndDate());
+			statement.setInt(6, task.getProjectId());
+			statement.setInt(7, task.getStatusId());
+			statement.setInt(8, task.getId());
+
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Không thể kết nối đến cơ sở dữ liệu");
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối");
+				e.printStackTrace();
+			}
+		}
+		return 0;
+
+	}
+	
+	public int deleteTask(int id) {
+		try {
+			connection = MySQLConnection.getConnection();
+			String query = "DELETE FROM crm_task WHERE id = ?";
+
+			statement = connection.prepareStatement(query);
+
+			statement.setInt(1, id);
+
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Không thể kết nối đến cơ sở dữ liệu");
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối");
+				e.printStackTrace();
+			}
+		}
+		return 0;
+
+	}
+	
 }

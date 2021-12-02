@@ -111,7 +111,7 @@
 										</tr>
 									</c:if>
 									
-									<c:if test="${login.role.name eq 'MEMBER'}">
+									<c:if test="${login.role.name eq 'MEMBER' && task.assignee eq login.id}">
 										<tr>
 											<td>${task.name}</td>
 											<td>${task.user.email }</td>

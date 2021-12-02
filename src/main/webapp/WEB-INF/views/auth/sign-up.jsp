@@ -56,7 +56,7 @@
             <div class="form-group">
                 <label class="text-label" for="name_2">Phone:</label>
                 <div class="input-group input-group-merge">
-                    <input id="name_2" type="text" class="form-control form-control-prepended" placeholder="0123456789" name="phone">
+                    <input id="phone_2" type="text" class="form-control form-control-prepended" placeholder="0123456789" name="phone">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="fas fa-phone-square-alt"></span>
@@ -67,7 +67,7 @@
             <div class="form-group">
                 <label class="text-label" for="name_2">Address:</label>
                 <div class="input-group input-group-merge">
-                    <input id="name_2" type="text" class="form-control form-control-prepended" placeholder="123 Trần Hưng Đạo Quận 1 TP.HCM" name="address">
+                    <input id="address_2" type="text" class="form-control form-control-prepended" placeholder="123 Trần Hưng Đạo Quận 1 TP.HCM" name="address">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-address-card"></span>
@@ -86,32 +86,5 @@
                 <a class="text-body text-underline" href="<c:url value='sign-in'/>">Have an account? Login</a>
             </div>
         </form>
-        
-	<content tag="scripts"> 
-		<!-- jQuery -->
-	    <script src="assets/vendor/jquery.min.js"></script>
-	
-	    <!-- Bootstrap -->
-	    <script src="assets/vendor/popper.min.js"></script>
-	    <script src="assets/vendor/bootstrap.min.js"></script>
-	
-	    <!-- Perfect Scrollbar -->
-	    <script src="assets/vendor/perfect-scrollbar.min.js"></script>
-	
-	    <!-- DOM Factory -->
-	    <script src="assets/vendor/dom-factory.js"></script>
-	
-	    <!-- MDK -->
-	    <script src="assets/vendor/material-design-kit.js"></script>
-	
-	    <!-- App -->
-	    <script src="assets/js/toggle-check-all.js"></script>
-	    <script src="assets/js/check-selected-row.js"></script>
-	    <script src="assets/js/dropdown.js"></script>
-	    <script src="assets/js/sidebar-mini.js"></script>
-	    <script src="assets/js/app.js"></script>
-	
-	    <!-- App Settings (safe to remove) -->
-	    <script src="assets/js/app-settings.js"></script>   
-     </content>
+      
 </body>

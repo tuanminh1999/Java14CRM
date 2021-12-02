@@ -21,7 +21,7 @@ public class UserRepository {
 		try {
 			connection = MySQLConnection.getConnection();
 			StringBuilder query = new StringBuilder("SELECT u.id, u.name, u.email, u.password, u.phone, u.address, u.role_id, ");
-			query.append("r.id, r.name, r.description FROM crm_user AS u INNER JOIN crm_role AS r ON u.role_id = r.id ORDER BY u.id ASC");
+			query.append("r.id, r.name, r.description FROM crm_user AS u INNER JOIN crm_role AS r ON u.role_id = r.id ORDER BY u.role_id");
 
 			statement = connection.prepareStatement(query.toString());
 			rs = statement.executeQuery();
