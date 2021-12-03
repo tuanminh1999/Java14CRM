@@ -89,7 +89,7 @@ public class TaskServlet extends HttpServlet{
 				request.setAttribute("message", "Thêm thành công");
 				request.setAttribute("alert", "success");
 			} else {
-				request.setAttribute("message", "Thêm thất bại");
+				request.setAttribute("message", "Thêm thất bại. Ngày phải trong khoảng thời gian làm project");
 				request.setAttribute("alert", "danger");
 			}
 		}else { // Edit Task
@@ -101,7 +101,7 @@ public class TaskServlet extends HttpServlet{
 				request.setAttribute("alert", "success");
 				request.setAttribute("task", newTask);
 			} else {
-				request.setAttribute("message", "Cập nhật thất bại");
+				request.setAttribute("message", "Cập nhật thất bại. Ngày phải trong khoảng thời gian làm project");
 				request.setAttribute("alert", "danger");
 				request.setAttribute("task", task);
 			}

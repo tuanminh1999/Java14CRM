@@ -2,11 +2,13 @@ package cybersoft.javabackend.java14.crm.service;
 
 import java.util.List;
 
+import cybersoft.javabackend.java14.crm.entity.Project;
 import cybersoft.javabackend.java14.crm.entity.Task;
 import cybersoft.javabackend.java14.crm.repository.TaskRepository;
 
 public class TaskService {
 	private TaskRepository taskRepository;
+	private ProjectService projectService;
 	
 	public TaskService() {
 		taskRepository = new TaskRepository();
@@ -21,10 +23,26 @@ public class TaskService {
 	}
 	
 	public boolean insertTask(Task task) {
+		projectService = new ProjectService();
+		Project project = projectService.findOneByProjectId(task.getProjectId());
+		if(project != null) {
+			if(task.getStartDate().compareTo(project.getStartDate()) < 0 || task.getStartDate().compareTo(project.getEndDate()) > 0
+				|| task.getEndDate().compareTo(project.getStartDate()) < 0 || task.getEndDate().compareTo(project.getEndDate()) > 0) {
+				return false;
+			}
+		}
 		return taskRepository.insertTask(task) == 1 ? true : false;
 	}
 	
 	public Task updateTask(Task task) {
+		projectService = new ProjectService();
+		Project project = projectService.findOneByProjectId(task.getProjectId());
+		if(project != null) {
+			if(task.getStartDate().compareTo(project.getStartDate()) < 0 || task.getStartDate().compareTo(project.getEndDate()) > 0
+				|| task.getEndDate().compareTo(project.getStartDate()) < 0 || task.getEndDate().compareTo(project.getEndDate()) > 0) {
+				return null;
+			}
+		}
 		return taskRepository.updateTask(task) == 1 ? findOneByTaskId(task.getId()) : null;
 	}
 	
