@@ -21,7 +21,7 @@ public class UserRepository {
 		try {
 			connection = MySQLConnection.getConnection();
 			StringBuilder query = new StringBuilder("SELECT u.id, u.name, u.email, u.password, u.phone, u.address, u.role_id, ");
-			query.append("r.id, r.name, r.description FROM crm_user AS u INNER JOIN crm_role AS r ON u.role_id = r.id ORDER BY u.id ASC");
+			query.append("r.id, r.name, r.description FROM crm_user AS u INNER JOIN crm_role AS r ON u.role_id = r.id ORDER BY u.role_id");
 
 			statement = connection.prepareStatement(query.toString());
 			rs = statement.executeQuery();
@@ -103,6 +103,50 @@ public class UserRepository {
 		return null;
 	}
 
+	public List<User> findByRoleId(int roleId) {
+		List<User> users = new LinkedList<User>();
+		try {
+			connection = MySQLConnection.getConnection();
+			StringBuilder query = new StringBuilder("SELECT u.id, u.name, u.email, u.password, u.phone, u.address, u.role_id, ");
+			query.append("r.id, r.name, r.description FROM crm_user AS u INNER JOIN crm_role AS r ON u.role_id = r.id WHERE u.role_id = ?");
+
+			statement = connection.prepareStatement(query.toString());
+			statement.setInt(1, roleId);
+			rs = statement.executeQuery();
+
+			while (rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt("u.id"));
+				user.setName(rs.getString("u.name"));
+				user.setEmail(rs.getString("u.email"));
+				user.setPassword(rs.getString("u.password"));
+				user.setPhone(rs.getString("u.phone"));
+				user.setAddress(rs.getString("u.address"));
+				user.setRoleId(rs.getInt("u.role_id"));
+				
+				Role role = new Role();
+				role.setName(rs.getString("r.name"));
+				role.setDescription(rs.getString("r.description"));
+				user.setRole(role);
+				
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			System.out.println("Không thể kết nối đến cơ sở dữ liệu");
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+				rs.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối");
+				e.printStackTrace();
+			}
+		}
+		return users;
+	}
+	
 	public int insertUser(User user) {
 		try {
 			connection = MySQLConnection.getConnection();

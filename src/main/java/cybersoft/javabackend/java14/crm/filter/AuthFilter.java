@@ -15,7 +15,11 @@ import cybersoft.javabackend.java14.crm.entity.User;
 import cybersoft.javabackend.java14.crm.util.SessionUtil;
 import cybersoft.javabackend.java14.crm.util.UrlConst;
 
-@WebFilter(urlPatterns = { UrlConst.ROOT })
+@WebFilter(urlPatterns = {
+		UrlConst.CREATE_PROJECT, UrlConst.MANAGE_PROJECT,
+		UrlConst.CREATE_USER, UrlConst.USER_LIST,
+		UrlConst.HOME, UrlConst.SIGN_IN, UrlConst.SIGN_UP
+})
 public class AuthFilter implements Filter {
 
 	@Override

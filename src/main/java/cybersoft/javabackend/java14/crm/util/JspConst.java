@@ -15,7 +15,8 @@ public class JspConst {
 	public static final String SIGN_UP = "/WEB-INF/views/auth/sign-up.jsp";
 	
 	/* TASK */
-	public static final String TASK = "/WEB-INF/views/task/task-list.jsp";
+	public static final String TASK_LIST = "/WEB-INF/views/task/task-list.jsp";
+	public static final String CREATE_TASK = "/WEB-INF/views/task/create-task.jsp";
 	
 	/* USER */
 	public static final String CREATE_USER = "/WEB-INF/views/user/create-user.jsp";

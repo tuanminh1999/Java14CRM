@@ -80,7 +80,7 @@ public class UserServlet extends HttpServlet {
 				request.setAttribute("message", "Thêm thành công");
 				request.setAttribute("alert", "success");
 			} else {
-				request.setAttribute("message", "Thêm thất bại công");
+				request.setAttribute("message", "Thêm thất bại");
 				request.setAttribute("alert", "danger");
 			}
 		} else { // Edit User

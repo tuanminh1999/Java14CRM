@@ -66,7 +66,7 @@ public class ProjectServlet extends HttpServlet{
 		project.setStartDate(DateConverter.convertStringToDateInSql(startDate));
 		project.setEndDate(DateConverter.convertStringToDateInSql(endDate));
 		
-		if(request.getParameter("id") == null) { // Add User
+		if(request.getParameter("id") == null) { // Add Project
 			project.setCreateBy(((User)SessionUtil.getInstance().getValue(request, "login")).getId());
 			if (projectService.insertProject(project)) {
 				request.setAttribute("message", "Thêm thành công");
@@ -75,7 +75,7 @@ public class ProjectServlet extends HttpServlet{
 				request.setAttribute("message", "Thêm thất bại công");
 				request.setAttribute("alert", "danger");
 			}
-		}else { // Edit User
+		}else { // Edit Project
 			int id = Integer.parseInt(request.getParameter("id"));
 			project.setId(id);
 			Project newProject = projectService.updateProject(project);

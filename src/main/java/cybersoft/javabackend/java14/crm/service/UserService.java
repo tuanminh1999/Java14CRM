@@ -30,6 +30,10 @@ public class UserService {
 		return userRepository.findOneByUserId(id);
 	}
 	
+	public List<User> findByRoleId(int roleId) {
+		return userRepository.findByRoleId(roleId);
+	}
+	
 	public User updateUser(User user) {
 		return userRepository.updateUser(user) == 1 ? findOneByUserId(user.getId()) : null;
 	}
