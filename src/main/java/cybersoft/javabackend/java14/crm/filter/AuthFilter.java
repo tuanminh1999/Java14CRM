@@ -15,11 +15,8 @@ import cybersoft.javabackend.java14.crm.entity.User;
 import cybersoft.javabackend.java14.crm.util.SessionUtil;
 import cybersoft.javabackend.java14.crm.util.UrlConst;
 
-@WebFilter(urlPatterns = {
-		UrlConst.CREATE_PROJECT, UrlConst.MANAGE_PROJECT,
-		UrlConst.CREATE_USER, UrlConst.USER_LIST,
-		UrlConst.HOME, UrlConst.SIGN_IN, UrlConst.SIGN_UP
-})
+@WebFilter(urlPatterns = { UrlConst.CREATE_PROJECT, UrlConst.MANAGE_PROJECT, UrlConst.CREATE_USER, UrlConst.USER_LIST,
+		UrlConst.HOME, UrlConst.SIGN_IN, UrlConst.SIGN_UP })
 public class AuthFilter implements Filter {
 
 	@Override
@@ -35,21 +32,21 @@ public class AuthFilter implements Filter {
 				|| url.startsWith(request.getContextPath() + UrlConst.CREATE_USER)
 				|| url.startsWith(request.getContextPath() + UrlConst.USER_LIST)) {
 			if (user != null) {
-				if(url.startsWith(request.getContextPath() + UrlConst.CREATE_USER) && request.getQueryString() != null) {// ALL USER ARE ACCESSED EDIT PROFILE
+				if (url.startsWith(request.getContextPath() + UrlConst.CREATE_USER) && (request.getQueryString() != null || request.getMethod().equals("POST"))) {// ALL USER ARE ACCESSED EDIT PROFILE
 					chain.doFilter(request, response);
-				}
-				else if (user.getRole().getName().equalsIgnoreCase("MEMBER")) { // MEMBER IS ACCESSED TO HOME AND TASK
+				} else if (user.getRole().getName().equalsIgnoreCase("MEMBER")) { // MEMBER IS ACCESSED TO HOME AND TASK
 					response.sendRedirect(request.getContextPath() + UrlConst.HOME);
-				}else{ // ADMIN, LEADER ARE FULL ACCESS TO WEB
+				} else { // ADMIN, LEADER ARE FULL ACCESS TO WEB
 					chain.doFilter(request, response);
 				}
 			} else {
 				response.sendRedirect(request.getContextPath() + UrlConst.SIGN_IN);
 			}
-		}else {
+		} else {
 			if (user != null) {
 				chain.doFilter(request, response);
-			} else if (UrlConst.SIGN_IN.equals(request.getServletPath()) || UrlConst.SIGN_UP.equals(request.getServletPath())) {
+			} else if (UrlConst.SIGN_IN.equals(request.getServletPath())
+					|| UrlConst.SIGN_UP.equals(request.getServletPath())) {
 				chain.doFilter(request, response);
 			} else {
 				response.sendRedirect(request.getContextPath() + UrlConst.SIGN_IN);

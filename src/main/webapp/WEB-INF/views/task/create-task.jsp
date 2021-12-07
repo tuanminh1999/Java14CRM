@@ -63,10 +63,10 @@
 				</div>
 			</c:if>
 		</div>
-		<form method="post" action="<c:url value="/create-task"/>"
-			id="taskForm" onsubmit="return validateTaskForm()">
 
-			<c:if test="${login.role.name eq 'MEMBER'}">
+		<c:if test="${login.role.name eq 'MEMBER'}">
+			<form method="post" action="<c:url value="/create-task"/>"
+				id="taskForm">
 				<div class="form-group">
 					<label class="col-sm-5 control-label no-padding-right">Name</label>
 					<div class="col-sm-7">
@@ -152,17 +152,55 @@
 					</div>
 				</div>
 
-				<input type="hidden" name="name" value="${task.name }">
-				<input type="hidden" name="description" value="${task.description }">
+				<input type="hidden" name="name" value="${task.name }"> <input
+					type="hidden" name="description" value="${task.description }">
 				<input type="hidden" name="assignee" value="${task.assignee }">
 				<input type="hidden" name="projectId" value="${task.projectId }">
 				<input type="hidden" name="startDate" value="${task.startDate }">
 				<input type="hidden" name="endDate" value="${task.endDate }">
+				<div class="form-group">
+					<label class="col-sm-5 control-label no-padding-right">Status</label>
+					<div class="col-sm-7">
+						<select class="form-control" name="statusId">
+							<c:if test="${empty task.id }">
+								<%-- Create User --%>
+								<c:forEach var="item" items="${statuses }">
+									<option value="${item.id }">${item.name }</option>
+								</c:forEach>
+							</c:if>
+							<c:if test="${not empty task.id }">
+								<%-- Edit User --%>
+								<c:forEach var="item" items="${statuses }">
+									<c:if test="${task.statusId eq item.id }">
+										<option value="${item.id }" selected="selected">${item.name }
+										</option>
+									</c:if>
+									<c:if test="${task.statusId ne item.id }">
+										<option value="${item.id }">${item.name }</option>
+									</c:if>
+								</c:forEach>
+							</c:if>
+						</select>
+					</div>
+				</div>
 
-			</c:if>
+				<div class="col-sm-12">
+					<c:if test="${task.id == null }">
+						<input type="submit" class="btn btn-primary" value="Create Task">
+					</c:if>
+					<c:if test="${task.id != null }">
+						<input type="hidden" name="id" value="${task.id }" />
+						<input type="submit" class="btn btn-primary" value="Edit Task">
+					</c:if>
+				</div>
+			</form>
+		</c:if>
 
+<%------------------------------------------------------------------------NOT MEMBER --------------------------------------------------------------%>
 
-			<c:if test="${login.role.name ne 'MEMBER'}">
+		<c:if test="${login.role.name ne 'MEMBER'}">
+			<form method="post" action="<c:url value="/create-task"/>"
+				id="taskForm" onsubmit="return validateTaskForm()">
 				<div class="form-group">
 					<label class="col-sm-5 control-label no-padding-right">Name</label>
 					<div class="col-sm-7">
@@ -225,7 +263,8 @@
 										</c:if>
 
 										<c:if test="${task.projectId ne item.id }">
-											<option value="${item.id }">${item.name }&nbsp;&nbsp;(${item.startDate }&nbsp;&nbsp;to&nbsp;&nbsp;${item.endDate })</option>										</c:if>
+											<option value="${item.id }">${item.name }&nbsp;&nbsp;(${item.startDate }&nbsp;&nbsp;to&nbsp;&nbsp;${item.endDate })</option>
+										</c:if>
 									</c:forEach>
 								</c:if>
 							</select>
@@ -280,43 +319,44 @@
 							value="${task.endDate }" />
 					</div>
 				</div>
-			</c:if>
-
-			<div class="form-group">
-				<label class="col-sm-5 control-label no-padding-right">Status</label>
-				<div class="col-sm-7">
-					<select class="form-control" name="statusId">
-						<c:if test="${empty task.id }">
-							<%-- Create User --%>
-							<c:forEach var="item" items="${statuses }">
-								<option value="${item.id }">${item.name }</option>
-							</c:forEach>
-						</c:if>
-						<c:if test="${not empty task.id }">
-							<%-- Edit User --%>
-							<c:forEach var="item" items="${statuses }">
-								<c:if test="${task.statusId eq item.id }">
-									<option value="${item.id }" selected="selected">${item.name }
-									</option>
-								</c:if>
-								<c:if test="${task.statusId ne item.id }">
+				<div class="form-group">
+					<label class="col-sm-5 control-label no-padding-right">Status</label>
+					<div class="col-sm-7">
+						<select class="form-control" name="statusId">
+							<c:if test="${empty task.id }">
+								<%-- Create User --%>
+								<c:forEach var="item" items="${statuses }">
 									<option value="${item.id }">${item.name }</option>
-								</c:if>
-							</c:forEach>
-						</c:if>
-					</select>
+								</c:forEach>
+							</c:if>
+							<c:if test="${not empty task.id }">
+								<%-- Edit User --%>
+								<c:forEach var="item" items="${statuses }">
+									<c:if test="${task.statusId eq item.id }">
+										<option value="${item.id }" selected="selected">${item.name }
+										</option>
+									</c:if>
+									<c:if test="${task.statusId ne item.id }">
+										<option value="${item.id }">${item.name }</option>
+									</c:if>
+								</c:forEach>
+							</c:if>
+						</select>
+					</div>
 				</div>
-			</div>
 
-			<div class="col-sm-12">
-				<c:if test="${task.id == null }">
-					<input type="submit" class="btn btn-primary" value="Create Task">
-				</c:if>
-				<c:if test="${task.id != null }">
-					<input type="hidden" name="id" value="${task.id }" />
-					<input type="submit" class="btn btn-primary" value="Edit Task">
-				</c:if>
-			</div>
-		</form>
+				<div class="col-sm-12">
+					<c:if test="${task.id == null }">
+						<input type="submit" class="btn btn-primary" value="Create Task">
+					</c:if>
+					<c:if test="${task.id != null }">
+						<input type="hidden" name="id" value="${task.id }" />
+						<input type="submit" class="btn btn-primary" value="Edit Task">
+					</c:if>
+				</div>
+			</form>
+		</c:if>
+
+
 	</div>
 </body>
